@@ -922,8 +922,8 @@ function DResults({ navigate }: { navigate: (p: Page) => void }) {
                                   <div aria-hidden className={`absolute border ${style.border} border-solid inset-0 pointer-events-none rounded-[8px]`} />
                                   <div className={`[word-break:break-word] flex flex-col font-['Source_Sans_3:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 ${style.text} text-[18px] whitespace-nowrap`}><p className="leading-[26px]">{crop.match}</p></div>
                                 </div>
-                                <div className="[word-break:break-word] flex flex-col font-['Source_Sans_3:Medium',sans-serif] font-medium justify-center leading-[0] min-w-full relative shrink-0 text-[#2c4a2e] text-[20px] w-[min-content]"><h5 className="block leading-[28px]">{crop.name}</h5></div>
-                                <div className="[word-break:break-word] flex flex-col font-['Source_Sans_3:Regular',sans-serif] font-normal justify-center leading-[0] min-w-full relative shrink-0 text-[#1a1a18] text-[16px] w-[min-content]"><p className="leading-[24px]">{crop.why}</p></div>
+                                <div className="[word-break:break-word] flex flex-col font-['Source_Sans_3:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#2c4a2e] text-[20px] w-full"><h5 className="block leading-[28px]">{crop.name}</h5></div>
+                                <div className="[word-break:break-word] flex flex-col font-['Source_Sans_3:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#1a1a18] text-[16px] w-full"><p className="leading-[24px]">{crop.why}</p></div>
                               </div>
                             </div>
                             <div className="h-0 relative shrink-0 w-full"><div className="absolute inset-[-0.8px_0_0_0]"><svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 330.667 0.8"><line stroke="#969696" strokeLinecap="round" strokeWidth="0.8" x1="0.4" x2="330.267" y1="0.4" y2="0.4" /></svg></div></div>
@@ -1528,8 +1528,8 @@ function MResults({ navigate }: { navigate: (p: Page) => void }) {
                                   <div aria-hidden className={`absolute border ${style.border} border-solid inset-0 pointer-events-none rounded-[8px]`} />
                                   <div className={`[word-break:break-word] flex flex-col font-['Source_Sans_3:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 ${style.text} text-[18px] whitespace-nowrap`}><p className="leading-[26px]">{crop.match}</p></div>
                                 </div>
-                                <div className="[word-break:break-word] flex flex-col font-['Source_Sans_3:Medium',sans-serif] font-medium justify-center leading-[0] min-w-full relative shrink-0 text-[#2c4a2e] text-[20px] w-[min-content]"><h5 className="block leading-[28px]">{crop.name}</h5></div>
-                                <div className="[word-break:break-word] flex flex-col font-['Source_Sans_3:Regular',sans-serif] font-normal justify-center leading-[0] min-w-full relative shrink-0 text-[#1a1a18] text-[16px] w-[min-content]"><p className="leading-[24px]">{crop.why}</p></div>
+                                <div className="[word-break:break-word] flex flex-col font-['Source_Sans_3:Medium',sans-serif] font-medium justify-center leading-[0] relative shrink-0 text-[#2c4a2e] text-[20px] w-full"><h5 className="block leading-[28px]">{crop.name}</h5></div>
+                                <div className="[word-break:break-word] flex flex-col font-['Source_Sans_3:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#1a1a18] text-[16px] w-full"><p className="leading-[24px]">{crop.why}</p></div>
                               </div>
                             </div>
                             <div className="h-0 relative shrink-0 w-full"><div className="absolute inset-[-0.8px_0_0_0]"><svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 295 0.8"><line stroke="#969696" strokeLinecap="round" strokeWidth="0.8" x1="0.4" x2="294.6" y1="0.4" y2="0.4" /></svg></div></div>
