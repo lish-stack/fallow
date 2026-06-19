@@ -906,8 +906,7 @@ function DResults({ navigate }: { navigate: (p: Page) => void }) {
               </div>
             </div>
 
-            {/* Cards — h-[464px] flex row */}
-            <div className="content-stretch flex gap-[16px] h-[464px] items-start relative shrink-0 w-full">
+            <div className="content-stretch flex gap-[16px] items-stretch relative shrink-0 w-full">
               {result.crops.map((crop, i) => {
                 const style = matchBadgeStyle[crop.match] ?? matchBadgeStyle["Worth exploring"];
                 return (

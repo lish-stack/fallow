@@ -127,7 +127,9 @@ Respond ONLY with raw JSON in this exact shape, no markdown fences, no commentar
   "resourceUrl": "A real, plausible URL for that organization"
 }
 
-Provide exactly 3 crops, ordered by match strength: one "Strong match", one "Good match", one "Worth exploring". infrastructureTags should be exactly 4 short phrases (3-6 words each) about likely acreage, infrastructure, debt/integrator situation, and land ownership — inferred reasonably from farm type and region, framed as regional generalizations. The readiness scores should be realistic integers 0-100 that vary based on the farmer's specific concern (e.g. if concern is financial viability, financialPosition should be lower).`;
+Provide exactly 3 crops, ordered by match strength: one "Strong match", one "Good match", one "Worth exploring". infrastructureTags should be exactly 4 short phrases (3-6 words each) about likely acreage, infrastructure, debt/integrator situation, and land ownership — inferred reasonably from farm type and region, framed as regional generalizations. The readiness scores should be realistic integers 0-100 that vary based on the farmer's specific concern (e.g. if concern is financial viability, financialPosition should be lower).
+
+The readiness.summary field MUST be exactly 2-4 words — a short status label only, never a sentence or explanation. Choose from or closely match this style: "Not ready yet", "Early stage", "Moderately ready", "Mostly ready", "Ready to start". Do not add reasoning, caveats, or context to this field — that belongs only in landSummary and obstacleBody.`;
 
   try {
     const response = await fetch("/api/assess", {
