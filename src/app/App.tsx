@@ -911,7 +911,7 @@ function DResults({ navigate }: { navigate: (p: Page) => void }) {
                 const style = matchBadgeStyle[crop.match] ?? matchBadgeStyle["Worth exploring"];
                 return (
                   <article key={i} className="bg-[#d9d2c4] flex-[1_0_0] min-w-px relative rounded-[16px] self-stretch">
-                    <div className="content-stretch flex flex-col items-start justify-start overflow-clip relative rounded-[inherit] size-full">
+                    <div className="content-stretch flex flex-col items-start justify-start relative rounded-[inherit] size-full">
                       <div className="relative shrink-0 w-full">
                         <div className="flex flex-col justify-start size-full">
                           <div className="content-stretch flex flex-col gap-[24px] items-start justify-start p-[24px] relative size-full">
@@ -1517,7 +1517,7 @@ function MResults({ navigate }: { navigate: (p: Page) => void }) {
                 const style = matchBadgeStyle[crop.match] ?? matchBadgeStyle["Worth exploring"];
                 return (
                   <article key={i} className="bg-[#d9d2c4] relative rounded-[16px] shrink-0 w-full">
-                    <div className="content-stretch flex flex-col items-start justify-start overflow-clip relative rounded-[inherit] size-full">
+                    <div className="content-stretch flex flex-col items-start justify-start relative rounded-[inherit] size-full">
                       <div className="relative shrink-0 w-full">
                         <div className="flex flex-col justify-start size-full">
                           <div className="content-stretch flex flex-col gap-[24px] items-start justify-start p-[24px] relative size-full">
