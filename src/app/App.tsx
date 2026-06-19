@@ -43,9 +43,12 @@ function useMobile() {
 
 // ─── Shared primitives ────────────────────────────────────────────────────────
 
-function Logo() {
+function Logo({ onClick }: { onClick?: () => void }) {
   return (
-    <div className="content-stretch flex flex-col gap-[4px] items-start relative shrink-0">
+    <div
+      onClick={onClick}
+      className={`content-stretch flex flex-col gap-[4px] items-start relative shrink-0 ${onClick ? "cursor-pointer" : ""}`}
+    >
       <div className="h-[40px] relative shrink-0 w-[108px]">
         <img alt="Fallow" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgLogoGreen} />
       </div>
@@ -249,11 +252,11 @@ const CONCERNS = [
 ];
 
 // ─── Desktop Header ───────────────────────────────────────────────────────────
-function DHeader({ btnLabel, onBtn }: { btnLabel: string; onBtn: () => void }) {
+function DHeader({ btnLabel, onBtn, onLogoClick }: { btnLabel: string; onBtn: () => void; onLogoClick?: () => void }) {
   return (
     <div className="absolute bg-[#f5f0e8] left-0 top-0 w-full z-10">
       <div className="content-stretch flex items-center justify-between overflow-clip px-[32px] py-[16px] relative size-full">
-        <Logo />
+        <Logo onClick={onLogoClick} />
         <button
           onClick={onBtn}
           className="bg-[#2c4a2e] hover:bg-[#8b6a14] transition-colors content-stretch flex items-center justify-center px-[16px] py-[12px] relative rounded-[12px] shrink-0 cursor-pointer"
@@ -267,11 +270,11 @@ function DHeader({ btnLabel, onBtn }: { btnLabel: string; onBtn: () => void }) {
 }
 
 // ─── Mobile Header ────────────────────────────────────────────────────────────
-function MHeader({ btnLabel, onBtn }: { btnLabel: string; onBtn: () => void }) {
+function MHeader({ btnLabel, onBtn, onLogoClick }: { btnLabel: string; onBtn: () => void; onLogoClick?: () => void }) {
   return (
     <div className="absolute bg-[#f5f0e8] left-0 top-0 w-full z-10">
       <div className="content-stretch flex items-center justify-between overflow-clip p-[16px] relative size-full">
-        <Logo />
+        <Logo onClick={onLogoClick} />
         <button
           onClick={onBtn}
           className="bg-[#2c4a2e] hover:bg-[#8b6a14] transition-colors content-stretch flex items-center justify-center px-[14px] py-[10px] relative rounded-[12px] shrink-0 cursor-pointer"
@@ -558,7 +561,7 @@ function DLanding({ navigate }: { navigate: (p: Page) => void }) {
         <Copyright svgData={svgD5} textColor="#f5f0e8" />
       </footer>
 
-      <DHeader btnLabel="Get started" onBtn={() => navigate("assess1")} />
+      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -616,7 +619,7 @@ function DAssess1({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="flex-[1_0_0] min-h-px relative w-full">
         <div className="content-stretch flex flex-col items-center justify-end p-[32px] relative size-full"><Copyright svgData={svgD1} /></div>
       </footer>
-      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -682,7 +685,7 @@ function DAssess2({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="flex-[1_0_0] min-h-px relative w-full">
         <div className="content-stretch flex flex-col items-center justify-end p-[32px] relative size-full"><Copyright svgData={svgD2} /></div>
       </footer>
-      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -710,7 +713,7 @@ function DResults({ navigate }: { navigate: (p: Page) => void }) {
             </button>
           </div>
         </section>
-        <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+        <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
       </div>
     );
   }
@@ -724,7 +727,7 @@ function DResults({ navigate }: { navigate: (p: Page) => void }) {
             <p className="font-['Source_Sans_3:Regular',sans-serif] text-[#1a1a18] text-[18px] leading-[26px] text-center max-w-[500px]">Pulling regional data for {countyLabel} and matching it to your situation. This takes about 15 seconds.</p>
           </div>
         </section>
-        <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+        <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
       </div>
     );
   }
@@ -741,7 +744,7 @@ function DResults({ navigate }: { navigate: (p: Page) => void }) {
             </button>
           </div>
         </section>
-        <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+        <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
       </div>
     );
   }
@@ -909,10 +912,10 @@ function DResults({ navigate }: { navigate: (p: Page) => void }) {
                 const style = matchBadgeStyle[crop.match] ?? matchBadgeStyle["Worth exploring"];
                 return (
                   <article key={i} className="bg-[#d9d2c4] flex-[1_0_0] min-w-px relative rounded-[16px] self-stretch">
-                    <div className="content-stretch flex flex-col items-start justify-center overflow-clip relative rounded-[inherit] size-full">
+                    <div className="content-stretch flex flex-col items-start justify-start overflow-clip relative rounded-[inherit] size-full">
                       <div className="relative shrink-0 w-full">
-                        <div className="flex flex-col justify-center size-full">
-                          <div className="content-stretch flex flex-col gap-[24px] items-start justify-center p-[24px] relative size-full">
+                        <div className="flex flex-col justify-start size-full">
+                          <div className="content-stretch flex flex-col gap-[24px] items-start justify-start p-[24px] relative size-full">
                             <div className="relative shrink-0 w-full">
                               <div className="content-stretch flex flex-col gap-[12px] items-start p-[8px] relative size-full">
                                 <div className={`${style.bg} content-stretch flex items-center justify-center px-[12px] py-[8px] relative rounded-[8px] shrink-0`}>
@@ -1012,7 +1015,7 @@ function DResults({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="content-stretch flex flex-col items-center justify-end overflow-clip p-[32px] relative shrink-0 w-full">
         <Copyright svgData={svgD9} />
       </footer>
-      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -1046,7 +1049,7 @@ function DDashboard({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="flex-[1_0_0] min-h-px relative w-full">
         <div className="content-stretch flex flex-col items-center justify-end p-[32px] relative size-full"><Copyright svgData={svgD4} /></div>
       </footer>
-      <DHeader btnLabel="Log out" onBtn={() => navigate("landing")} />
+      <DHeader btnLabel="Log out" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -1079,7 +1082,7 @@ function DSignup({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="flex-[1_0_0] min-h-px relative w-full">
         <div className="content-stretch flex flex-col items-center justify-end p-[32px] relative size-full"><Copyright svgData={svgD5} /></div>
       </footer>
-      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -1110,7 +1113,7 @@ function DLogin({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="flex-[1_0_0] min-h-px relative w-full">
         <div className="content-stretch flex flex-col items-center justify-end p-[32px] relative size-full"><Copyright svgData={svgD5} /></div>
       </footer>
-      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+      <DHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -1194,7 +1197,7 @@ function MLanding({ navigate }: { navigate: (p: Page) => void }) {
         </div>
       </footer>
 
-      <MHeader btnLabel="Get started" onBtn={() => navigate("assess1")} />
+      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -1254,7 +1257,7 @@ function MAssess1({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="flex-[1_0_0] min-h-px relative w-full">
         <div className="content-stretch flex flex-col items-center justify-end px-[16px] py-[32px] relative size-full"><Copyright svgData={svgM1} /></div>
       </footer>
-      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -1320,7 +1323,7 @@ function MAssess2({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="relative shrink-0 w-full">
         <div className="content-stretch flex flex-col items-center justify-end px-[16px] py-[32px] relative size-full"><Copyright svgData={svgM2} /></div>
       </footer>
-      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -1348,7 +1351,7 @@ function MResults({ navigate }: { navigate: (p: Page) => void }) {
             </button>
           </div>
         </section>
-        <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+        <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
       </div>
     );
   }
@@ -1362,7 +1365,7 @@ function MResults({ navigate }: { navigate: (p: Page) => void }) {
             <p className="font-['Source_Sans_3:Regular',sans-serif] text-[#1a1a18] text-[16px] leading-[24px] text-center">Pulling regional data for {countyLabel}. About 15 seconds.</p>
           </div>
         </section>
-        <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+        <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
       </div>
     );
   }
@@ -1379,7 +1382,7 @@ function MResults({ navigate }: { navigate: (p: Page) => void }) {
             </button>
           </div>
         </section>
-        <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+        <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
       </div>
     );
   }
@@ -1515,10 +1518,10 @@ function MResults({ navigate }: { navigate: (p: Page) => void }) {
                 const style = matchBadgeStyle[crop.match] ?? matchBadgeStyle["Worth exploring"];
                 return (
                   <article key={i} className="bg-[#d9d2c4] relative rounded-[16px] shrink-0 w-full">
-                    <div className="content-stretch flex flex-col items-start justify-center overflow-clip relative rounded-[inherit] size-full">
+                    <div className="content-stretch flex flex-col items-start justify-start overflow-clip relative rounded-[inherit] size-full">
                       <div className="relative shrink-0 w-full">
-                        <div className="flex flex-col justify-center size-full">
-                          <div className="content-stretch flex flex-col gap-[24px] items-start justify-center p-[24px] relative size-full">
+                        <div className="flex flex-col justify-start size-full">
+                          <div className="content-stretch flex flex-col gap-[24px] items-start justify-start p-[24px] relative size-full">
                             <div className="relative shrink-0 w-full">
                               <div className="content-stretch flex flex-col gap-[12px] items-start p-[8px] relative size-full">
                                 <div className={`${style.bg} content-stretch flex items-center justify-center px-[12px] py-[8px] relative rounded-[8px] shrink-0`}>
@@ -1618,7 +1621,7 @@ function MResults({ navigate }: { navigate: (p: Page) => void }) {
           </div>
         </div>
       </footer>
-      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -1648,7 +1651,7 @@ function MDashboard({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="flex-[1_0_0] min-h-px relative w-full">
         <div className="content-stretch flex flex-col items-center justify-end px-[16px] py-[32px] relative size-full"><Copyright svgData={svgM4} /></div>
       </footer>
-      <MHeader btnLabel="Log out" onBtn={() => navigate("landing")} />
+      <MHeader btnLabel="Log out" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -1683,7 +1686,7 @@ function MSignup({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="flex-[1_0_0] min-h-px relative w-full">
         <div className="content-stretch flex flex-col items-center justify-end px-[16px] py-[32px] relative size-full"><Copyright svgData={svgM5} /></div>
       </footer>
-      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
@@ -1714,7 +1717,7 @@ function MLogin({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="flex-[1_0_0] min-h-px relative w-full">
         <div className="content-stretch flex flex-col items-center justify-end px-[16px] py-[32px] relative size-full"><Copyright svgData={svgM5} /></div>
       </footer>
-      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} />
+      <MHeader btnLabel="Get started" onBtn={() => navigate("landing")} onLogoClick={() => navigate("landing")} />
     </div>
   );
 }
