@@ -862,7 +862,7 @@ function DResults({ navigate }: { navigate: (p: Page) => void }) {
                       <div className="flex flex-row items-center size-full">
                         <div className="content-stretch flex gap-[8px] items-center p-[12px] relative size-full">
                           <div className="relative shrink-0 size-[32px]"><svg className="absolute block inset-0 size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 32 32"><path d={svgD9.p12cdf500} fill="#2C4A2E" /></svg></div>
-                          <div className="[word-break:break-word] flex flex-col font-['Source_Sans_3:Regular',sans-serif] font-normal justify-center leading-[0] relative shrink-0 text-[#2c4a2e] text-[20px] whitespace-nowrap">
+                          <div className="[word-break:break-word] flex flex-1 flex-col font-['Source_Sans_3:Regular',sans-serif] font-normal justify-center leading-[0] relative min-w-0 text-[#2c4a2e] text-[20px]">
                             <p className="leading-[28px]">{result.readiness.summary}</p>
                           </div>
                         </div>
@@ -925,16 +925,18 @@ function DResults({ navigate }: { navigate: (p: Page) => void }) {
                             </div>
                             <div className="h-0 relative shrink-0 w-full"><div className="absolute inset-[-0.8px_0_0_0]"><svg className="block size-full" fill="none" preserveAspectRatio="none" viewBox="0 0 330.667 0.8"><line stroke="#969696" strokeLinecap="round" strokeWidth="0.8" x1="0.4" x2="330.267" y1="0.4" y2="0.4" /></svg></div></div>
                             <div className="relative shrink-0 w-full">
-                              <div className="[word-break:break-word] content-stretch flex font-['Source_Sans_3:Regular',sans-serif] font-normal gap-[20px] items-start leading-[0] p-[8px] relative size-full text-[14px]">
-                                <div className="content-stretch flex flex-col items-start justify-between relative self-stretch shrink-0 text-[#2c4a2e] w-[115px]">
-                                  <div className="flex flex-col justify-center relative shrink-0 w-full"><p className="leading-[18px]">Earning potential</p></div>
-                                  <div className="flex flex-col justify-center relative shrink-0 w-full"><p className="leading-[18px]">Time to income</p></div>
-                                  <div className="flex flex-col justify-center relative shrink-0 w-full"><p className="leading-[18px]">Est. conversion cost</p></div>
+                              <div className="[word-break:break-word] flex flex-col font-['Source_Sans_3:Regular',sans-serif] font-normal gap-[10px] leading-[0] p-[8px] relative size-full text-[14px]">
+                                <div className="flex items-start justify-between gap-[16px]">
+                                  <span className="shrink-0 text-[#2c4a2e] leading-[18px]">Earning potential</span>
+                                  <span className="text-right text-[#1a1a18] leading-[22px]">{crop.earningPotential}</span>
                                 </div>
-                                <div className="content-stretch flex flex-[1_0_0] flex-col gap-[16px] items-center min-w-px relative text-[#1a1a18] text-right">
-                                  <div className="flex flex-col justify-center relative shrink-0 w-full"><p className="leading-[22px]">{crop.earningPotential}</p></div>
-                                  <div className="flex flex-col justify-center relative shrink-0 w-full"><p className="leading-[22px]">{crop.timeToIncome}</p></div>
-                                  <div className="flex flex-col justify-center relative shrink-0 w-full"><p className="leading-[22px]">{crop.conversionCost}</p></div>
+                                <div className="flex items-start justify-between gap-[16px]">
+                                  <span className="shrink-0 text-[#2c4a2e] leading-[18px]">Time to income</span>
+                                  <span className="text-right text-[#1a1a18] leading-[22px]">{crop.timeToIncome}</span>
+                                </div>
+                                <div className="flex items-start justify-between gap-[16px]">
+                                  <span className="shrink-0 text-[#2c4a2e] leading-[18px]">Est. conversion cost</span>
+                                  <span className="text-right text-[#1a1a18] leading-[22px]">{crop.conversionCost}</span>
                                 </div>
                               </div>
                             </div>
