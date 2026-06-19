@@ -1,0 +1,59 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;500;600&display=swap');
+
+/*
+  ─── Font family: remap Figma-generated class names ─────────────────────────
+  Figma exports font-family as e.g. 'Playfair Display:Medium' — browsers don't
+  know that name. These attribute-selector rules intercept every element carrying
+  one of those Tailwind arbitrary font classes and remap to the real family.
+
+  Why !important: fonts.css is imported BEFORE tailwind.css, so Tailwind's own
+  un-layered utility rules (same specificity [0,1,0]) arrive later in the cascade
+  and would otherwise win. !important forces our remapping to take precedence.
+*/
+html [class*="Playfair_Display"],
+body [class*="Playfair_Display"] {
+  font-family: 'Playfair Display', Georgia, 'Times New Roman', serif !important;
+}
+html [class*="Source_Sans_3"],
+body [class*="Source_Sans_3"] {
+  font-family: 'Source Sans 3', system-ui, -apple-system, ui-sans-serif, sans-serif !important;
+}
+
+/* Weight per variant — colon is a plain literal inside CSS attribute values */
+html [class*="Source_Sans_3:Light"],
+body [class*="Source_Sans_3:Light"]      { font-weight: 300 !important; }
+html [class*="Source_Sans_3:Regular"],
+body [class*="Source_Sans_3:Regular"]    { font-weight: 400 !important; }
+html [class*="Source_Sans_3:Medium"],
+body [class*="Source_Sans_3:Medium"]     { font-weight: 500 !important; }
+html [class*="Playfair_Display:Regular"],
+body [class*="Playfair_Display:Regular"] { font-weight: 400 !important; }
+html [class*="Playfair_Display:Medium"],
+body [class*="Playfair_Display:Medium"]  { font-weight: 500 !important; }
+
+/*
+  ─── Heading / button reset ──────────────────────────────────────────────────
+  theme.css @layer base forces fixed font-size and font-weight onto h1-h4 and
+  button (e.g. h1 → 24px medium). The Figma export places text-[XXpx] on parent
+  <div> containers and expects <h1> to inherit that size — the base layer breaks
+  this by imposing its own value.
+
+  Un-layered CSS always beats @layer regardless of source order, so these bare
+  element selectors override theme.css without needing !important.
+
+  IMPORTANT: We reset font-size and font-weight only — NOT line-height.
+  Resetting line-height to "inherit" would cause h1 elements inside a leading-[0]
+  container to inherit line-height: 0 and collapse visually. Instead, we let each
+  h1/h2/etc that has its own leading-[Xpx] Tailwind class get the correct value
+  (utility class specificity [0,1,0] beats @layer base), and let elements without
+  an explicit leading class fall back to @layer base's safe 1.5 default.
+*/
+h1, h2, h3, h4, h5, h6 {
+  font-size: inherit;
+  font-weight: inherit;
+}
+button {
+  font-size: inherit;
+  font-weight: inherit;
+}
