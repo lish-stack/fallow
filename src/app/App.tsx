@@ -1,6 +1,9 @@
 import { useState, useEffect } from "react";
 import { RouterProvider, createBrowserRouter, useNavigate } from "react-router";
 import { AssessmentProvider, useAssessment, geocodeAddress } from "./AssessmentContext";
+import { useForm, ValidationError } from "@formspree/react";
+
+const FORMSPREE_FORM_ID = "maqzrlrj";
 
 // ─── SVG path imports ─────────────────────────────────────────────────────────
 import svgDesktop from "@/imports/Desktop/svg-l2arygfuta";
@@ -334,12 +337,13 @@ function DInputLgDark({ placeholder, value, onChange, type = "text" }: { placeho
 }
 
 // Desktop small / mobile large — light-bg — px-12 py-8 — text-16 — green focus border — green placeholder
-function DInputSm({ placeholder, value, onChange, type = "text" }: { placeholder: string; value: string; onChange: (v: string) => void; type?: string }) {
+function DInputSm({ placeholder, value, onChange, type = "text", name }: { placeholder: string; value: string; onChange: (v: string) => void; type?: string; name?: string }) {
   return (
     <div className="bg-[#f5f0e8] relative rounded-[8px] w-full border border-[#969696] focus-within:border-[#2c4a2e] transition-colors">
       <div className="content-stretch flex items-start px-[12px] py-[8px] relative size-full">
         <input
           type={type}
+          name={name}
           className="bg-transparent font-['Source_Sans_3:Medium',sans-serif] font-medium text-[#1a1a18] text-[16px] leading-[24px] w-full outline-none placeholder:font-light placeholder:text-[#2c4a2e]"
           placeholder={placeholder}
           value={value}
@@ -384,12 +388,13 @@ function DInputSmDark({ placeholder, value, onChange, type = "text" }: { placeho
 }
 
 // Mobile small — light-bg — px-10 py-8 — text-14 — green focus border — green placeholder
-function MInputSm({ placeholder, value, onChange, type = "text" }: { placeholder: string; value: string; onChange: (v: string) => void; type?: string }) {
+function MInputSm({ placeholder, value, onChange, type = "text", name }: { placeholder: string; value: string; onChange: (v: string) => void; type?: string; name?: string }) {
   return (
     <div className="bg-[#f5f0e8] relative rounded-[8px] w-full border border-[#969696] focus-within:border-[#2c4a2e] transition-colors">
       <div className="content-stretch flex items-start px-[10px] py-[8px] relative size-full">
         <input
           type={type}
+          name={name}
           className="bg-transparent font-['Source_Sans_3:Medium',sans-serif] font-medium text-[#1a1a18] text-[14px] leading-[22px] w-full outline-none placeholder:font-light placeholder:text-[#2c4a2e]"
           placeholder={placeholder}
           value={value}
@@ -434,11 +439,12 @@ function MInputSmDark({ placeholder, value, onChange, type = "text" }: { placeho
 }
 
 // Textarea — desktop small / mobile large — light-bg — text-16
-function DTextareaSm({ placeholder, value, onChange }: { placeholder: string; value: string; onChange: (v: string) => void }) {
+function DTextareaSm({ placeholder, value, onChange, name }: { placeholder: string; value: string; onChange: (v: string) => void; name?: string }) {
   return (
     <div className="bg-[#f5f0e8] relative rounded-[8px] w-full h-[120px] border border-[#969696] focus-within:border-[#2c4a2e] transition-colors">
       <div className="content-stretch flex items-start px-[12px] py-[8px] relative size-full">
         <textarea
+          name={name}
           className="bg-transparent font-['Source_Sans_3:Medium',sans-serif] font-medium text-[#1a1a18] text-[16px] leading-[24px] w-full h-full outline-none resize-none placeholder:font-light placeholder:text-[#2c4a2e]"
           placeholder={placeholder}
           value={value}
@@ -450,11 +456,12 @@ function DTextareaSm({ placeholder, value, onChange }: { placeholder: string; va
 }
 
 // Textarea — mobile small — text-14
-function MTextareaSm({ placeholder, value, onChange }: { placeholder: string; value: string; onChange: (v: string) => void }) {
+function MTextareaSm({ placeholder, value, onChange, name }: { placeholder: string; value: string; onChange: (v: string) => void; name?: string }) {
   return (
     <div className="bg-[#f5f0e8] relative rounded-[8px] w-full h-[120px] border border-[#969696] focus-within:border-[#2c4a2e] transition-colors">
       <div className="content-stretch flex items-start px-[10px] py-[8px] relative size-full">
         <textarea
+          name={name}
           className="bg-transparent font-['Source_Sans_3:Medium',sans-serif] font-medium text-[#1a1a18] text-[14px] leading-[22px] w-full h-full outline-none resize-none placeholder:font-light placeholder:text-[#2c4a2e]"
           placeholder={placeholder}
           value={value}
@@ -472,9 +479,10 @@ function DLanding({ navigate }: { navigate: (p: Page) => void }) {
   const [address, setAddress] = useState("");
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoError, setGeoError] = useState("");
-  const [contactName, setContactName] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [contactMsg, setContactMsg] = useState("");
+  const [contactNameVal, setContactNameVal] = useState("");
+  const [contactEmailVal, setContactEmailVal] = useState("");
+  const [contactMsgVal, setContactMsgVal] = useState("");
+  const [contactState, contactSubmit] = useForm(FORMSPREE_FORM_ID);
 
   async function handleStart() {
     if (!address.trim() || geoLoading) return;
@@ -552,12 +560,26 @@ function DLanding({ navigate }: { navigate: (p: Page) => void }) {
       <footer className="content-stretch flex flex-col gap-[16px] items-center justify-center overflow-clip p-[32px] relative shrink-0 w-full">
         <div className="bg-[#d9d2c4] content-stretch flex flex-col gap-[20px] items-center px-[28px] py-[32px] relative rounded-[16px] shrink-0 w-[387px] border-[1.4px] border-[#8b6a14]">
           <p className="[word-break:break-word] font-['Playfair_Display:Medium',sans-serif] font-medium leading-[32px] text-[#2c4a2e] text-[24px] text-center">Drop us a line</p>
-          <DInputSm placeholder="Name" value={contactName} onChange={setContactName} />
-          <DInputSm placeholder="Email address" value={contactEmail} onChange={setContactEmail} type="email" />
-          <DTextareaSm placeholder="Message" value={contactMsg} onChange={setContactMsg} />
-          <button className="group content-stretch flex items-center justify-center px-[14px] py-[10px] relative rounded-[12px] shrink-0 border border-[#8b6a14] cursor-pointer hover:bg-[#8b6a14] transition-colors">
-            <span className="font-['Source_Sans_3:Medium',sans-serif] font-medium text-[#8b6a14] group-hover:text-[#f5f0e8] text-[16px] leading-[24px] transition-colors">Submit</span>
-          </button>
+          {contactState.succeeded ? (
+            <p className="font-['Source_Sans_3:Regular',sans-serif] text-[#2c4a2e] text-[16px] leading-[24px] text-center">Thanks for reaching out — we'll get back to you soon.</p>
+          ) : (
+            <form onSubmit={contactSubmit} className="content-stretch flex flex-col gap-[20px] items-center w-full">
+              <DInputSm placeholder="Name" name="name" value={contactNameVal} onChange={setContactNameVal} />
+              <DInputSm placeholder="Email address" name="email" value={contactEmailVal} onChange={setContactEmailVal} type="email" />
+              <ValidationError prefix="Email" field="email" errors={contactState.errors} />
+              <DTextareaSm placeholder="Message" name="message" value={contactMsgVal} onChange={setContactMsgVal} />
+              <ValidationError prefix="Message" field="message" errors={contactState.errors} />
+              <button
+                type="submit"
+                disabled={contactState.submitting}
+                className="group content-stretch flex items-center justify-center px-[14px] py-[10px] relative rounded-[12px] shrink-0 border border-[#8b6a14] cursor-pointer hover:bg-[#8b6a14] transition-colors disabled:opacity-60 disabled:cursor-default"
+              >
+                <span className="font-['Source_Sans_3:Medium',sans-serif] font-medium text-[#8b6a14] group-hover:text-[#f5f0e8] text-[16px] leading-[24px] transition-colors">
+                  {contactState.submitting ? "Sending..." : "Submit"}
+                </span>
+              </button>
+            </form>
+          )}
         </div>
         <Copyright svgData={svgD5} textColor="#f5f0e8" />
       </footer>
@@ -1126,9 +1148,10 @@ function MLanding({ navigate }: { navigate: (p: Page) => void }) {
   const [address, setAddress] = useState("");
   const [geoLoading, setGeoLoading] = useState(false);
   const [geoError, setGeoError] = useState("");
-  const [contactName, setContactName] = useState("");
-  const [contactEmail, setContactEmail] = useState("");
-  const [contactMsg, setContactMsg] = useState("");
+  const [contactNameVal, setContactNameVal] = useState("");
+  const [contactEmailVal, setContactEmailVal] = useState("");
+  const [contactMsgVal, setContactMsgVal] = useState("");
+  const [contactState, contactSubmit] = useForm(FORMSPREE_FORM_ID);
 
   async function handleStart() {
     if (!address.trim() || geoLoading) return;
@@ -1211,12 +1234,26 @@ function MLanding({ navigate }: { navigate: (p: Page) => void }) {
           <div className="content-stretch flex flex-col gap-[16px] items-center justify-center p-[32px] relative size-full">
             <div className="bg-[#d9d2c4] content-stretch flex flex-col gap-[16px] items-center px-[24px] py-[28px] relative rounded-[16px] shrink-0 w-[311px] border-[1.4px] border-[#8b6a14]">
               <p className="[word-break:break-word] font-['Playfair_Display:Medium',sans-serif] font-medium leading-[28px] text-[#2c4a2e] text-[20px] text-center">Drop us a line</p>
-              <MInputSm placeholder="Name" value={contactName} onChange={setContactName} />
-              <MInputSm placeholder="Email address" value={contactEmail} onChange={setContactEmail} type="email" />
-              <MTextareaSm placeholder="Message" value={contactMsg} onChange={setContactMsg} />
-              <button className="group content-stretch flex items-center justify-center px-[14px] py-[10px] relative rounded-[12px] shrink-0 border border-[#8b6a14] cursor-pointer hover:bg-[#8b6a14] transition-colors">
-                <span className="font-['Source_Sans_3:Medium',sans-serif] font-medium text-[#8b6a14] group-hover:text-[#f5f0e8] text-[16px] leading-[24px] transition-colors">Submit</span>
-              </button>
+              {contactState.succeeded ? (
+                <p className="font-['Source_Sans_3:Regular',sans-serif] text-[#2c4a2e] text-[14px] leading-[22px] text-center">Thanks for reaching out — we'll get back to you soon.</p>
+              ) : (
+                <form onSubmit={contactSubmit} className="content-stretch flex flex-col gap-[16px] items-center w-full">
+                  <MInputSm placeholder="Name" name="name" value={contactNameVal} onChange={setContactNameVal} />
+                  <MInputSm placeholder="Email address" name="email" value={contactEmailVal} onChange={setContactEmailVal} type="email" />
+                  <ValidationError prefix="Email" field="email" errors={contactState.errors} />
+                  <MTextareaSm placeholder="Message" name="message" value={contactMsgVal} onChange={setContactMsgVal} />
+                  <ValidationError prefix="Message" field="message" errors={contactState.errors} />
+                  <button
+                    type="submit"
+                    disabled={contactState.submitting}
+                    className="group content-stretch flex items-center justify-center px-[14px] py-[10px] relative rounded-[12px] shrink-0 border border-[#8b6a14] cursor-pointer hover:bg-[#8b6a14] transition-colors disabled:opacity-60 disabled:cursor-default"
+                  >
+                    <span className="font-['Source_Sans_3:Medium',sans-serif] font-medium text-[#8b6a14] group-hover:text-[#f5f0e8] text-[16px] leading-[24px] transition-colors">
+                      {contactState.submitting ? "Sending..." : "Submit"}
+                    </span>
+                  </button>
+                </form>
+              )}
             </div>
             <Copyright svgData={svgM} textColor="#f5f0e8" />
           </div>
